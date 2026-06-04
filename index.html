@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>InterviewAI – Question Generator</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="site-header">
+    <div class="logo">
+      <span class="logo-icon">◈</span>
+      <span class="logo-text">InterviewAI</span>
+    </div>
+    <nav class="header-nav">
+      <a href="#generator">Generate</a>
+      <a href="#saved">Saved</a>
+      <a href="#about">About</a>
+    </nav>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero" id="generator">
+    <div class="hero-bg-grid"></div>
+    <div class="hero-content">
+      <div class="hero-tag">AI-Powered · 500+ Questions</div>
+      <h1 class="hero-title">Ace Every<br/><span class="accent">Interview</span></h1>
+      <p class="hero-sub">Generate tailored interview questions by role, level, and domain — powered by AI.</p>
+    </div>
+  </section>
+
+  <!-- GENERATOR PANEL -->
+  <main class="generator-panel">
+    <div class="config-card" id="config-card">
+      <h2 class="card-title">Configure Your Session</h2>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label>Job Role</label>
+          <div class="select-wrap">
+            <select id="role-select">
+              <option value="">— Pick a role —</option>
+              <option value="Software Engineer">Software Engineer</option>
+              <option value="Data Scientist">Data Scientist</option>
+              <option value="Product Manager">Product Manager</option>
+              <option value="UX Designer">UX Designer</option>
+              <option value="DevOps Engineer">DevOps Engineer</option>
+              <option value="Data Analyst">Data Analyst</option>
+              <option value="Machine Learning Engineer">ML Engineer</option>
+              <option value="Frontend Developer">Frontend Developer</option>
+              <option value="Backend Developer">Backend Developer</option>
+              <option value="Business Analyst">Business Analyst</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Experience Level</label>
+          <div class="select-wrap">
+            <select id="level-select">
+              <option value="">— Pick a level —</option>
+              <option value="Entry Level">Entry Level (0–2 yrs)</option>
+              <option value="Mid Level">Mid Level (2–5 yrs)</option>
+              <option value="Senior Level">Senior Level (5+ yrs)</option>
+              <option value="Lead / Manager">Lead / Manager</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label>Question Category</label>
+          <div class="select-wrap">
+            <select id="category-select">
+              <option value="All">All Categories</option>
+              <option value="Technical">Technical</option>
+              <option value="Behavioral">Behavioral</option>
+              <option value="Situational">Situational</option>
+              <option value="Culture Fit">Culture Fit</option>
+              <option value="Case Study">Case Study</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Number of Questions</label>
+          <div class="select-wrap">
+            <select id="count-select">
+              <option value="5">5 Questions</option>
+              <option value="10" selected>10 Questions</option>
+              <option value="15">15 Questions</option>
+              <option value="20">20 Questions</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group full-width">
+        <label>Custom Focus (optional)</label>
+        <input type="text" id="custom-focus" placeholder="e.g. System design, React hooks, Leadership, etc." />
+      </div>
+
+      <div class="difficulty-row">
+        <label>Difficulty</label>
+        <div class="difficulty-options">
+          <button class="diff-btn active" data-diff="Easy">Easy</button>
+          <button class="diff-btn" data-diff="Medium">Medium</button>
+          <button class="diff-btn" data-diff="Hard">Hard</button>
+          <button class="diff-btn" data-diff="Mixed">Mixed</button>
+        </div>
+      </div>
+
+      <button class="generate-btn" id="generate-btn">
+        <span class="btn-icon">⚡</span>
+        <span>Generate Questions</span>
+      </button>
+    </div>
+
+    <!-- RESULTS -->
+    <div class="results-section" id="results-section" style="display:none">
+      <div class="results-header">
+        <div>
+          <h2 class="results-title">Your Questions</h2>
+          <p class="results-meta" id="results-meta"></p>
+        </div>
+        <div class="results-actions">
+          <button class="action-btn" id="save-btn">💾 Save Set</button>
+          <button class="action-btn" id="export-btn">⬇ Export CSV</button>
+          <button class="action-btn secondary" id="reset-btn">↩ New Search</button>
+        </div>
+      </div>
+
+      <div id="questions-list" class="questions-list"></div>
+    </div>
+
+    <!-- SAVED SETS -->
+    <div class="saved-section" id="saved">
+      <h2 class="section-heading">Saved Question Sets</h2>
+      <div id="saved-list" class="saved-list">
+        <p class="empty-state">No saved sets yet. Generate and save a set to see it here.</p>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- ABOUT -->
+  <section class="about-section" id="about">
+    <div class="about-inner">
+      <h2>About InterviewAI</h2>
+      <p>InterviewAI uses a curated dataset of 500+ interview questions mapped to roles, levels, and categories. The AI engine filters, ranks, and optionally fetches additional questions via the Anthropic Claude API to fill dynamic needs. All data is stored locally in your browser.</p>
+      <div class="about-stats">
+        <div class="stat"><span>500+</span>Questions</div>
+        <div class="stat"><span>10</span>Job Roles</div>
+        <div class="stat"><span>5</span>Categories</div>
+        <div class="stat"><span>4</span>Difficulty Levels</div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <span>◈ InterviewAI — Built with care</span>
+    <span>Data stored locally · No sign-in required</span>
+  </footer>
+
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
